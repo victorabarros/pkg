@@ -1,6 +1,7 @@
 package maps
 
-//Copy return a deepCopy from inputed map
+// Copy return a deepCopy from inputed map
+// inspired on: https://stackoverflow.com/a/53062590
 func Copy(m map[string]interface{}) map[string]interface{} {
 	cp := make(map[string]interface{})
 	for k, v := range m {

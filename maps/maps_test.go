@@ -6,24 +6,26 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestCopy(t *testing.T) {
-	m1 := map[string]interface{}{
-		"a": "bbb",
-		"b": map[string]interface{}{
-			"c": 123,
+func TestCopyMap(t *testing.T) {
+	tests := []map[string]interface{}{
+		map[string]interface{}{
+			"a": "bbb",
+			"b": map[string]interface{}{
+				"c": 123,
+			},
+		},
+		map[string]interface{}{
+			"r": 1,
+			"t": 0,
+		},
+		map[string]interface{}{
+			"r": true,
+			"t": false,
 		},
 	}
 
-	m2 := Copy(m1)
-
-	m1["a"] = "zzz"
-	delete(m1, "b")
-
-	require.Equal(t, map[string]interface{}{"a": "zzz"}, m1)
-	require.Equal(t, map[string]interface{}{
-		"a": "bbb",
-		"b": map[string]interface{}{
-			"c": 123,
-		},
-	}, m2)
+	for _, in := range tests {
+		cp := Copy(in)
+		require.Equal(t, cp, in)
+	}
 }
